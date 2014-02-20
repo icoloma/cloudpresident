@@ -39,11 +39,10 @@ public class ThePresidentServlet extends HttpServlet {
 	    writer.flush();
 	}
 	
-	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		User currentUser = UserServiceFactory.getUserService().getCurrentUser();
-		Comments.store(req.getParameter("user-comment"), currentUser.getNickname());
+		Comment.store(req.getParameter("user-comment"), currentUser.getNickname());
 		resp.sendRedirect("/");
 	}
 	
@@ -54,14 +53,7 @@ public class ThePresidentServlet extends HttpServlet {
 		args.put("user", userService.getCurrentUser());
 		args.put("loginUrl", userService.createLoginURL(req.getRequestURI()));
 		args.put("logoutUrl", userService.createLogoutURL(req.getRequestURI()));
-		args.put("comments", Collections2.transform(Comments.retrieveAll(), new Function<Entity, String>() {
-
-			@Override
-			public String apply(Entity comment) {
-				return comment.getProperty("user") + ": " + comment.getProperty("text");
-			}
-			
-		}));
+		args.put("comments", Comment.retrieveAll());
 		return args;
 	}
 	
