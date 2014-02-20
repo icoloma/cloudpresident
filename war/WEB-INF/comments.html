@@ -4,13 +4,13 @@
   <body>
     <h1>The president is...</h1> <img src="obama.png"> <p>{{name}}</p>
     <p>
-   	{{^user}}Hello, <a href="{{loginUrl}}">please log in</a> to post comments.</p>{{/user}}
-   	{{#user}}Hello, <b>{{nickname}}</b> - <a href="{{logoutUrl}}">logout</a>{{/user}}
-   	</p>
-
+   	{{^user}}Hello, <a href="{{loginUrl}}">please log in</a> to post comments.{{/user}}
+   	{{#user}}
+   	Hello, <b>{{nickname}}</b> - <a href="{{logoutUrl}}">logout</a>
     <form action="" method="post">
       <textarea name="user-comment" placeholder="Introduce your comment"></textarea><br>
       <input type="submit" value="OK">
     </form> 
+   	{{/user}}
   </body>
 </html>
